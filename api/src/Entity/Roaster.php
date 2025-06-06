@@ -31,14 +31,14 @@ class Roaster
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $rating = null;
-
     /**
      * @var Collection<int, Coffee>
      */
     #[ORM\OneToMany(targetEntity: Coffee::class, mappedBy: 'roaster')]
     private Collection $coffees;
+
+    #[ORM\ManyToOne(inversedBy: 'roasters')]
+    private ?Rating $rating = null;
 
     public function __construct()
     {
@@ -71,18 +71,6 @@ class Roaster
     public function setCity(string $city): static
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getRating(): ?int
-    {
-        return $this->rating;
-    }
-
-    public function setRating(?int $rating): static
-    {
-        $this->rating = $rating;
 
         return $this;
     }
@@ -137,6 +125,18 @@ class Roaster
     public function removeOrigin(Origin $origin): static
     {
         $this->origin->removeElement($origin);
+
+        return $this;
+    }
+
+    public function getRating(): ?Rating
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?Rating $rating): static
+    {
+        $this->rating = $rating;
 
         return $this;
     }

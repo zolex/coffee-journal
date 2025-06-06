@@ -1,0 +1,31 @@
+App\Entity\Rating:
+    rating_10:
+        name: Perfect
+        value: 10
+    rating_9:
+        name: Excellent
+        value: 9
+    rating_8:
+        name: Very Good
+        value: 8
+    rating_7:
+        name: Good
+        value: 7
+    rating_6:
+        name: Acceptable
+        value: 6
+    rating_5:
+        name: Mediocre
+        value: 5
+    rating_4:
+        name: Disappointing
+        value: 4
+    rating_3:
+        name: Bad
+        value: 3
+    rating_2:
+        name: Inedible
+        value: 2
+    rating_1:
+        name: Disgusting
+        value: 1

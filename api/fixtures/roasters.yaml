@@ -3,9 +3,8 @@ App\Entity\Roaster:
         name: illy
         origin: ['@origin_2']
         city: Trieste
-        rating: 9
     roaster_2:
         name: 3886coffees
         origin: [ '@origin_1' ]
         city: Bonn
-        rating: 10
+        rating: '@rating_8'

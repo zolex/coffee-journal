@@ -57,10 +57,20 @@ class Coffee
     #[ORM\JoinColumn(nullable: true)]
     private ?RoastLevel $roastLevel = null;
 
+    /**
+     * @var Collection<int, Journal>
+     */
+    #[ORM\OneToMany(targetEntity: Journal::class, mappedBy: 'coffee', orphanRemoval: true)]
+    private Collection $journals;
+
+    #[ORM\ManyToOne(inversedBy: 'coffees')]
+    private ?Rating $rating = null;
+
     public function __construct()
     {
         $this->beans = new ArrayCollection();
         $this->origin = new ArrayCollection();
+        $this->journals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +170,48 @@ class Coffee
     public function setRoastLevel(?RoastLevel $roastLevel): static
     {
         $this->roastLevel = $roastLevel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Journal>
+     */
+    public function getJournals(): Collection
+    {
+        return $this->journals;
+    }
+
+    public function addJournal(Journal $journal): static
+    {
+        if (!$this->journals->contains($journal)) {
+            $this->journals->add($journal);
+            $journal->setCoffee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJournal(Journal $journal): static
+    {
+        if ($this->journals->removeElement($journal)) {
+            // set the owning side to null (unless already changed)
+            if ($journal->getCoffee() === $this) {
+                $journal->setCoffee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRating(): ?Rating
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?Rating $rating): static
+    {
+        $this->rating = $rating;
 
         return $this;
     }

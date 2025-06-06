@@ -8,5 +8,6 @@ export const CoffeeCreate = () => (
     <InputGuesser source="name" />
     <InputGuesser source="origin" />
     <InputGuesser source="roastLevel" />
+    <InputGuesser source="rating" />
   </CreateGuesser>
 );

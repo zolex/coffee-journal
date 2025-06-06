@@ -4,11 +4,13 @@ App\Entity\Coffee:
         name: Classico
         origin: ['@origin_3', '@origin_5']
         roastLevel: '@roast_level_3'
+        rating: '@rating_9'
     coffee_2:
         roaster: '@roaster_2'
         name: Foobar
         origin: [ '@origin_1', '@origin_2', '@origin_3' ]
         roastLevel: '@roast_level_2'
+        rating: '@rating_5'
     coffee_3:
         roaster: '@roaster_2'
         name: Barbaz
