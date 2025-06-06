@@ -2,11 +2,13 @@ import {HydraAdmin, ResourceGuesser} from "@api-platform/admin";
 import {CoffeeEdit} from "./CoffeeEdit";
 import {CoffeeCreate} from "./CoffeeCreate";
 import {CoffeeList} from "./CoffeeList";
+import {Layout} from 'react-admin';
 
 const App = () => (
   <HydraAdmin
     entrypoint={window.origin}
     title="Coffee JOURNAL"
+    layout={Layout}
   >
     <ResourceGuesser name="roasters" />
     <ResourceGuesser name="coffees" list={CoffeeList} edit={CoffeeEdit} create={CoffeeCreate} />
