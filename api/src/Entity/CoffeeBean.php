@@ -13,7 +13,11 @@ use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Range;
 
 #[ORM\Entity(repositoryClass: CoffeeBeanRepository::class)]
-#[ApiResource]
+#[ApiResource(order: [
+    'coffee.roaster' => 'ASC',
+    'coffee.name' => 'ASC',
+    'type.name' => 'ASC'
+])]
 class CoffeeBean
 {
     #[ORM\Id]

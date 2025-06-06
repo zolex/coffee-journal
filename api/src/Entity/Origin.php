@@ -10,7 +10,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OriginRepository::class)]
-#[ApiResource]
+#[ApiResource(order: [
+    'country' => 'ASC'
+])]
 class Origin
 {
     #[ORM\Id]

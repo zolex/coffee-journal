@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RoasterRepository::class)]
-#[ApiResource]
+#[ApiResource(order: ['name' => 'ASC'])]
 class Roaster
 {
     #[ORM\Id]

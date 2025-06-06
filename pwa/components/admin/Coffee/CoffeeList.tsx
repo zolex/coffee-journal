@@ -6,6 +6,7 @@ export const CoffeeList = () => (
     <FieldGuesser source="name" />
     <FieldGuesser source="roastLevel" />
     <FieldGuesser source="beans" />
+    <FieldGuesser source="origin" />
     <FieldGuesser source="rating" />
   </ListGuesser>
 );

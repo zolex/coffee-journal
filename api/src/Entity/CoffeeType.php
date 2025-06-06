@@ -11,7 +11,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoffeeTypeRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    order: ['name' => 'ASC'],
+)]
 class CoffeeType
 {
     #[ORM\Id]

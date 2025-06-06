@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Choice;
 
 #[ORM\Entity(repositoryClass: BeanTypeRepository::class)]
-#[ApiResource]
+#[ApiResource(order: ['name' => 'ASC'])]
 class BeanType
 {
     #[ORM\Id]

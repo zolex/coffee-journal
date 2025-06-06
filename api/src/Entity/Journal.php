@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\JournalRepository;
 use Doctrine\DBAL\Types\Types;
@@ -16,11 +18,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(SearchFilter::class, properties: [
     'type' => 'exact',
     'coffee' => 'exact',
+    'rating' => 'exact'
+])]
+#[ApiFilter(RangeFilter::class, properties: [
+    'rating.value'
 ])]
 #[ApiFilter(OrderFilter::class, properties: [
     'type.name' => 'ASC',
     'coffee.name' => 'ASC',
-    'rating' => 'DESC',
+    'rating.value' => 'DESC',
 ])]
 class Journal
 {
@@ -39,54 +45,56 @@ class Journal
 
     #[ORM\ManyToOne(inversedBy: 'journals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Rating $rating = null;
+    private Rating $rating;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 0.1, max: 100.0)]
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private string $powderWeight;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 0.1, max: 500.0)]
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private string $brewedWeight;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 1.0, max: 15.0)]
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private string $pressure;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 1.0, max: 50.0)]
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private string $duration;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 70, max: 100)]
     #[ORM\Column]
     private int $temperature;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 1, max: 100.0)]
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private string $grindLevel;
 
     #[Assert\NotBlank]
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 1, max: 100.0)]
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
     private string $grindDuration;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date = null;
+    #[Assert\NotBlank]
+    #[Assert\Type(\DateTimeImmutable::class)]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private \DateTimeImmutable $date;
 
-    #[Assert\Type('string')]
+    #[Assert\Type(['string', 'float', 'integer'])]
     #[Assert\Range(min: 0, max: 1000)]
     #[ORM\Column(nullable: true)]
     private ?int $beanAge = null;
@@ -94,6 +102,12 @@ class Journal
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    #[ApiProperty(iris: ["https://schema.org/name"])]
+    public function getLabel(): string
+    {
+        return sprintf("%s #%d", $this->coffee->getFullName(), $this->id);
     }
 
     public function getCoffee(): Coffee
@@ -197,14 +211,14 @@ class Journal
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(string|\DateTimeImmutable $date): static
     {
-        $this->date = $date;
+        $this->date = \is_string($date) ? \DateTimeImmutable($date) : $date;
 
         return $this;
     }

@@ -13,7 +13,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoffeeRepository::class)]
-#[ApiResource]
+#[ApiResource(order: [
+    'roaster.name' => 'ASC',
+    'name' => 'ASC',
+])]
 #[ApiFilter(SearchFilter::class, properties: [
     'roaster' => 'exact',
     'name' => 'ipartial',
@@ -44,12 +47,17 @@ class Coffee
     /**
      * @var Collection<int, CoffeeBean>
      */
+    #[ORM\OrderBy([
+        'percent' => 'DESC',
+        'type' => 'ASC',
+    ])]
     #[ORM\OneToMany(targetEntity: CoffeeBean::class, mappedBy: 'coffee', orphanRemoval: true)]
     private Collection $beans;
 
     /**
      * @var Collection<int, Origin>
      */
+    #[ORM\OrderBy(['country' => 'ASC'])]
     #[ORM\ManyToMany(targetEntity: Origin::class, inversedBy: 'coffees')]
     private Collection $origin;
 
