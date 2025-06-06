@@ -1,0 +1,9 @@
+App\Entity\BeanType:
+    bean_type_1:
+        name: Arabica
+    bean_type_2:
+        name: Robusta
+    bean_type_3:
+        name: Liberica
+    bean_type_4:
+        name: Excelsa

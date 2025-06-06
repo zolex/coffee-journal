@@ -11,6 +11,10 @@ const App = () => (
     <ResourceGuesser name="roasters" />
     <ResourceGuesser name="coffees" list={CoffeeList} edit={CoffeeEdit} create={CoffeeCreate} />
     <ResourceGuesser name="coffee_beans" />
+
+    <ResourceGuesser name="origins" />
+    <ResourceGuesser name="roast_levels" />
+    <ResourceGuesser name="bean_types" />
   </HydraAdmin>
 );
 

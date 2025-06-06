@@ -22,8 +22,11 @@ class Roaster
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $country = null;
+    /**
+     * @var Collection<int, Origin>
+     */
+    #[ORM\ManyToMany(targetEntity: Origin::class, inversedBy: 'roasters')]
+    private Collection $origin;
 
     #[ORM\Column(length: 255)]
     private ?string $city = null;
@@ -40,6 +43,7 @@ class Roaster
     public function __construct()
     {
         $this->coffees = new ArrayCollection();
+        $this->origin = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,18 +59,6 @@ class Roaster
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): static
-    {
-        $this->country = $country;
 
         return $this;
     }
@@ -121,6 +113,30 @@ class Roaster
                 $coffee->setRoaster(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Origin>
+     */
+    public function getOrigin(): Collection
+    {
+        return $this->origin;
+    }
+
+    public function addOrigin(Origin $origin): static
+    {
+        if (!$this->origin->contains($origin)) {
+            $this->origin->add($origin);
+        }
+
+        return $this;
+    }
+
+    public function removeOrigin(Origin $origin): static
+    {
+        $this->origin->removeElement($origin);
 
         return $this;
     }

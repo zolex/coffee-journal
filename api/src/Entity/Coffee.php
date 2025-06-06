@@ -7,24 +7,23 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use App\Config\RoastLevel;
 use App\Repository\CoffeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CoffeeRepository::class)]
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: [
     'roaster' => 'exact',
     'name' => 'ipartial',
-    'beans.type.name' => 'exact',
+    'beans' => 'exact',
     'beans.type' => 'exact',
+    'beans.type.name' => 'exact',
     'roastLevel' => 'exact',
 ])]
 #[ApiFilter(OrderFilter::class, properties: [
-    'roaster.name' => 'ASC',
+    'roaster' => 'ASC',
     'name' => 'ASC',
     'roastLevel' => 'ASC',
 ])]
@@ -48,13 +47,20 @@ class Coffee
     #[ORM\OneToMany(targetEntity: CoffeeBean::class, mappedBy: 'coffee', orphanRemoval: true)]
     private Collection $beans;
 
-    #[ORM\Column(enumType: RoastLevel::class, options: ["default" => RoastLevel::MEDIUM])]
-    #[Assert\Choice(options: RoastLevel::ARRAY)]
-    private RoastLevel $roastLevel = RoastLevel::MEDIUM;
+    /**
+     * @var Collection<int, Origin>
+     */
+    #[ORM\ManyToMany(targetEntity: Origin::class, inversedBy: 'coffees')]
+    private Collection $origin;
+
+    #[ORM\ManyToOne(inversedBy: 'coffees')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?RoastLevel $roastLevel = null;
 
     public function __construct()
     {
         $this->beans = new ArrayCollection();
+        $this->origin = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,12 +128,36 @@ class Coffee
         return $this;
     }
 
-    public function getRoastLevel(): RoastLevel
+    /**
+     * @return Collection<int, Origin>
+     */
+    public function getOrigin(): Collection
+    {
+        return $this->origin;
+    }
+
+    public function addOrigin(Origin $origin): static
+    {
+        if (!$this->origin->contains($origin)) {
+            $this->origin->add($origin);
+        }
+
+        return $this;
+    }
+
+    public function removeOrigin(Origin $origin): static
+    {
+        $this->origin->removeElement($origin);
+
+        return $this;
+    }
+
+    public function getRoastLevel(): ?RoastLevel
     {
         return $this->roastLevel;
     }
 
-    public function setRoastLevel(RoastLevel $roastLevel): static
+    public function setRoastLevel(?RoastLevel $roastLevel): static
     {
         $this->roastLevel = $roastLevel;
 

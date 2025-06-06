@@ -1,0 +1,13 @@
+App\Entity\Origin:
+    origin_1:
+        country: Germany
+    origin_2:
+        country: Italy
+    origin_3:
+        country: Arabia
+    origin_4:
+        country: Brazil
+    origin_5:
+        country: Guatemala
+    origin_6:
+        country: Columbia

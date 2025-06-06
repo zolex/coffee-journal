@@ -1,0 +1,7 @@
+App\Entity\RoastLevel:
+    roast_level_1:
+        level: light
+    roast_level_2:
+        level: medium
+    roast_level_3:
+        level: dark
