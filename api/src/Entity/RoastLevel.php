@@ -5,13 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Config\RoastLevel as RoastLevelEnum;
-use App\Repository\RoastLevelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: RoastLevelRepository::class)]
+#[ORM\Entity]
 #[ApiResource]
 class RoastLevel
 {

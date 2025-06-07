@@ -7,12 +7,20 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\CoffeeRepository;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use App\Validator\Constraint\CoffeeBeans;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: CoffeeRepository::class)]
+#[ORM\Entity]
 #[ApiResource(order: [
     'roaster.name' => 'ASC',
     'name' => 'ASC',
@@ -20,7 +28,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiFilter(SearchFilter::class, properties: [
     'roaster' => 'exact',
     'name' => 'ipartial',
-    'beans' => 'exact',
     'beans.type' => 'exact',
     'beans.type.name' => 'exact',
     'roastLevel' => 'exact',
@@ -30,37 +37,68 @@ use Doctrine\ORM\Mapping as ORM;
     'name' => 'ASC',
     'roastLevel' => 'ASC',
 ])]
+#[GetCollection(
+    normalizationContext: [
+        'groups' => ['coffee:list'],
+    ]
+)]
+#[Get(
+    normalizationContext: [
+        'groups' => ['coffee:read'],
+    ]
+)]
+#[Post(
+    normalizationContext: [
+        'groups' => ['coffee:write']
+    ],
+)]
+#[Put]
+#[Patch]
+#[Delete]
 class Coffee
 {
+    #[Groups(['Default', 'coffee:read', 'coffee:list'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotNull]
+    #[Groups(['Default', 'coffee:read', 'coffee:list', 'coffee:write'])]
     #[ORM\ManyToOne(inversedBy: 'coffees')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Roaster $roaster = null;
 
+    #[Assert\NotBlank]
+    #[Groups(['Default', 'coffee:read', 'coffee:list', 'coffee:write'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     /**
      * @var Collection<int, CoffeeBean>
      */
+    #[Assert\Valid]
+    #[CoffeeBeans]
+    #[ApiProperty(writableLink: true)]
+    #[Groups(['coffee:read', 'coffee:list', 'coffee:write'])]
     #[ORM\OrderBy([
         'percent' => 'DESC',
-        'type' => 'ASC',
+        //'type' => 'ASC',
     ])]
-    #[ORM\OneToMany(targetEntity: CoffeeBean::class, mappedBy: 'coffee', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: CoffeeBean::class, mappedBy: 'coffee', cascade: ['persist'], orphanRemoval: true)]
     private Collection $beans;
 
     /**
      * @var Collection<int, Origin>
      */
+    #[Assert\Count(min: 1)]
+    #[Groups(['Default', 'coffee:read', 'coffee:list', 'coffee:write'])]
     #[ORM\OrderBy(['country' => 'ASC'])]
     #[ORM\ManyToMany(targetEntity: Origin::class, inversedBy: 'coffees')]
     private Collection $origin;
 
+    #[Assert\NotNull]
+    #[Groups(['Default', 'coffee:read', 'coffee:list', 'coffee:write'])]
     #[ORM\ManyToOne(inversedBy: 'coffees')]
     #[ORM\JoinColumn(nullable: true)]
     private ?RoastLevel $roastLevel = null;
@@ -68,9 +106,11 @@ class Coffee
     /**
      * @var Collection<int, Journal>
      */
+    #[Groups(['Default'])]
     #[ORM\OneToMany(targetEntity: Journal::class, mappedBy: 'coffee', orphanRemoval: true)]
     private Collection $journals;
 
+    #[Groups(['Default', 'coffee:read', 'coffee:list', 'coffee:write'])]
     #[ORM\ManyToOne(inversedBy: 'coffees')]
     private ?Rating $rating = null;
 
@@ -110,10 +150,11 @@ class Coffee
         return $this;
     }
 
+    #[Groups(['Default', 'coffee:read', 'coffee:list'])]
     #[ApiProperty(iris: ["https://schema.org/name"])]
     public function getFullName(): string
     {
-        return sprintf("%s - %s", $this->roaster->getName(), $this->name);
+        return sprintf("%s %s", $this->roaster->getName(), $this->name);
     }
 
     /**

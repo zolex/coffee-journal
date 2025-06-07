@@ -1,0 +1,25 @@
+App\Entity\Ingredient:
+    ingredient_1:
+        name: Espresso
+    ingredient_2:
+        name: Filter Coffee
+    ingredient_3:
+        name: Milk
+    ingredient_4:
+        name: Creme
+    ingredient_5:
+        name: Ice Cubes
+    ingredient_6:
+        name: Ice Cream
+    ingredient_7:
+        name: Syrup
+    ingredient_8:
+        name: Chocolate
+    ingredient_9:
+        name: Hot Water
+    ingredient_10:
+        name: Milk Foam
+    ingredient_11:
+        name: Sugar
+    ingredient_12:
+        name: Crushed Ice

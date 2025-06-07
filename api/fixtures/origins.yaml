@@ -11,3 +11,7 @@ App\Entity\Origin:
         country: Guatemala
     origin_6:
         country: Columbia
+    origin_7:
+        country: Peru
+    origin_8:
+        country: India

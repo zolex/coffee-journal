@@ -8,12 +8,11 @@ use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\JournalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: JournalRepository::class)]
+#[ORM\Entity]
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: [
     'type' => 'exact',
@@ -35,14 +34,17 @@ class Journal
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne(inversedBy: 'journals')]
     #[ORM\JoinColumn(nullable: false)]
-    private CoffeeType $type;
+    private Recipe $type;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne(inversedBy: 'journals')]
     #[ORM\JoinColumn(nullable: false)]
     private Coffee $coffee;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne(inversedBy: 'journals')]
     #[ORM\JoinColumn(nullable: false)]
     private Rating $rating;
@@ -90,6 +92,7 @@ class Journal
     private string $grindDuration;
 
     #[Assert\NotBlank]
+    #[Assert\NotNull]
     #[Assert\Type(\DateTimeImmutable::class)]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private \DateTimeImmutable $date;
@@ -235,12 +238,12 @@ class Journal
         return $this;
     }
 
-    public function getType(): CoffeeType
+    public function getType(): Recipe
     {
         return $this->type;
     }
 
-    public function setType(CoffeeType $type): static
+    public function setType(Recipe $type): static
     {
         $this->type = $type;
 

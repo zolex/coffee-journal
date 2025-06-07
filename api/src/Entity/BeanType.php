@@ -5,11 +5,10 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Config\BeanType as BeanTypeEnum;
-use App\Repository\BeanTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Choice;
 
-#[ORM\Entity(repositoryClass: BeanTypeRepository::class)]
+#[ORM\Entity]
 #[ApiResource(order: ['name' => 'ASC'])]
 class BeanType
 {

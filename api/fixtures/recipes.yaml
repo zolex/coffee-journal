@@ -1,0 +1,191 @@
+App\Entity\Recipe:
+    coffee_type_1:
+        name: Risteretto
+        info: A very short, even more concentrated espresso
+        ingredients: ['@ingredient_1']
+        preparation: "A Ristretto is a very short and concentrated espresso shot.\n
+            \n
+            1. Grind: Use a very fine grind, often slightly finer than for a regular espresso.\n
+            2. Dose & Tamp: Use the standard amount of finely ground coffee for an espresso shot (e.g., 7-10g for a single, 14-20g for a double). Tamp firmly and evenly.\n
+            3. Extraction: Start the espresso machine and allow hot, pressurized water to flow through the coffee.\n
+            4. Stop Early: Crucially, stop the extraction much earlier than for a standard espresso. Aim for approximately 15-20ml of liquid in 15-20 seconds for a single shot.\n
+            5. Serve: The result is a highly concentrated, full-bodied shot with a rich aroma and often a sweeter taste."
+    coffee_type_2:
+        name: Espresso
+        info: Strong, concentrated coffee brewed under high pressure, with a thick crema.
+        preparation: "Espresso is made by forcing hot, pressurized water through finely ground coffee.\n
+            \n
+            1. Grind: Use freshly roasted coffee beans, ground very finely, similar to powdered sugar.\n
+            2. Dose: Measure the appropriate amount of ground coffee into the portafilter (e.g., 7-10g for a single, 14-20g for a double).\n
+            3. Tamp: Compress the coffee grounds firmly and evenly into a flat puck using a tamper.\n
+            4. Brew: Lock the portafilter into the espresso machine. Activate the pump, forcing hot water (around 90-96°C / 195-205°F) through the coffee at high pressure (around 9 bars).\n
+            5. Extract: The shot should pour as a steady, thin stream, resembling warm honey. Aim for about 25-30 seconds to yield 25-35ml for a single shot, or 50-70ml for a double.\n
+            6. Serve: The finished espresso should have a distinctive, reddish-brown crema on top. Serve immediately."
+        ingredients: ['@ingredient_1']
+    coffee_type_3:
+        name: Lungo
+        info: An extended espresso, made with more water, resulting in a milder taste.
+        ingredients: ['@ingredient_1']
+        preparation: "A Lungo (\"long\" in Italian) is an espresso shot extracted with more water, resulting in a larger volume.\n
+            \n
+            1. Grind: Use a grind setting slightly coarser than for a standard espresso, or the same as espresso depending on desired outcome and machine.\n
+            2. Dose & Tamp: Use the same amount of finely ground coffee as for a standard espresso (e.g., 7-10g for a single, 14-20g for a double). Tamp firmly and evenly.\n
+            3. Extraction: Initiate the espresso machine, allowing hot, pressurized water to flow through the coffee.\n
+            4. Longer Extraction: Allow the extraction to continue for a significantly longer time than a standard espresso, typically aiming for double the volume (e.g., 50-70ml for a \"single\" lungo) over 45-60 seconds.\n
+            5. Serve: The resulting lungo will be larger and milder than a standard espresso, often with less intense flavor compounds."
+    coffee_type_4:
+        name: Cafe Crema
+        info: A larger espresso with a thick layer of crema and more water.
+        ingredients: ['@ingredient_1']
+        preparation: "A Caffè Crema is a longer coffee resembling a large espresso with a significant layer of crema, often prepared using an espresso machine.\n
+            \n
+            1. Grind: Use a coarser grind than for a traditional espresso, but finer than for drip coffee. Some machines have a specific \"Caffè Crema\" setting.\n
+            2. Dose & Tamp: Use a standard espresso dose (e.g., 7-10g for a single, 14-20g for a double). Tamp firmly and evenly.\n
+            3. Extraction: Initiate the espresso machine, allowing hot, pressurized water to flow through the coffee.\n
+            4. Extended Extraction: Allow the extraction to continue for a longer period than a Lungo, aiming for a larger volume (e.g., 120-180ml) over 25-40 seconds, depending on the desired strength and volume.\n
+            5. Serve: The result is a coffee with a larger volume and a persistent, thick layer of crema on top."
+    coffee_type_5:
+        name: Americano
+        info: Espresso diluted with hot water to resemble drip coffee.
+        ingredients: ['@ingredient_1', '@ingredient_9']
+        preparation: "An Americano is made by diluting an espresso with hot water to achieve a similar strength to drip coffee while retaining espresso's flavor.\n
+            \n
+            1. Heat Water: Heat water to just below boiling, typically around 80-90°C (175-195°F).\n
+            2. Brew Espresso: Prepare one or two shots of espresso. This involves grinding beans finely, dosing 7-20g into the portafilter, tamping, and extracting 25-70ml of liquid in 25-30 seconds using an espresso machine.\n
+            3. Combine: Pour the hot water into a cup, then add the prepared espresso shots on top. This method helps preserve the espresso's crema. Alternatively, espresso can be added first, then hot water. The ratio of espresso to hot water typically ranges from 1:1 to 1:4, depending on desired strength.\n
+            4. Serve: Stir gently and serve immediately."
+    coffee_type_6:
+        name: Cafe Freddo
+        info: An iced espresso, often shaken or blended to create a frothy texture.
+        preparation: "A Cafe Freddo is an iced espresso drink, often shaken or blended to create a frothy texture, popular in Greece and Cyprus.\n
+            \n
+            1. Brew Espresso: Prepare a double shot of espresso. This involves grinding beans finely, dosing about 14-20g into the portafilter, tamping, and extracting 50-70ml of liquid in 25-30 seconds using an espresso machine.\n
+            2. Add Sweetener (Optional): If desired, add sugar or syrup to the hot espresso and stir until dissolved.\n
+            3. Chill and Froth: Pour the espresso (and sweetener) into a metal shaker or a dedicated Freddo maker. Add a few ice cubes.\n
+            4. Shake/Blend: Vigorously shake or blend the mixture until it becomes very cold and develops a rich, thick, creamy foam.\n
+            5. Serve: Place fresh ice cubes into a tall glass. Pour the frothed Freddo over the ice.\n
+            6. Enjoy: Serve immediately with a straw."
+    coffee_type_7:
+        name: Long Black
+        info: Espresso shots poured into hot water, similar to an Americano but retaining more crema.
+        preparation: "A Long Black is a coffee drink popular in Australia and New Zealand, made by pouring a double shot of espresso over hot water, distinguishing it from an Americano by preserving the crema.\n
+            \n
+            1. Heat Water: Heat water to a hot, but not boiling, temperature, usually around 80-90°C (175-195°F).\n
+            2. Prepare Water Base: Pour the hot water into your serving cup. The volume of water typically ranges from 120-180ml, depending on desired strength.\n
+            3. Brew Espresso: Prepare a double shot of espresso into a separate vessel. This involves grinding beans finely, dosing about 14-20g into the portafilter, tamping, and extracting 50-70ml of liquid in 25-30 seconds using an espresso machine.\n
+            4. Combine (Espresso Last): Carefully pour the freshly brewed espresso shots directly over the hot water in the serving cup. This method allows the espresso's crema to float on top.\n
+            5. Serve: Serve immediately, allowing the distinct layers and crema to be visible."
+    coffee_type_8:
+        name: Espresso con Panna
+        info: An espresso topped with a dollop of whipped cream.
+        ingredients: ['@ingredient_1', '@ingredient_4']
+        preparation: "Espresso con Panna is a simple espresso drink topped with a dollop of whipped cream.\n
+            \n
+            1. Prepare Whipped Cream: Ensure you have whipped cream ready. This can be freshly whipped heavy cream (sweetened or unsweetened) or dispensed from a can.\n
+            2. Brew Espresso: Prepare a single or double shot of espresso directly into your serving cup. This involves grinding beans finely, dosing 7-20g, tamping, and extracting 25-70ml in 25-30 seconds using an espresso machine.\n
+            3. Add Cream: Gently add a dollop of whipped cream directly on top of the freshly brewed espresso.\n
+            4. Serve: Serve immediately, allowing the cream to slowly melt into the hot coffee."
+    coffee_type_9:
+        name: Cappuccino
+        info: Equal parts espresso, hot milk, and milk foam.
+        ingredients: ['@ingredient_1', '@ingredient_3', '@ingredient_10']
+        preparation: "A Cappuccino is traditionally made with equal parts espresso, hot steamed milk, and a generous layer of milk foam.\n
+            \n
+            1. Brew Espresso: Prepare a single or double shot of espresso directly into your serving cup (a pre-heated 150-180ml or 5-6 oz cup is ideal). This involves grinding beans finely, dosing 7-20g, tamping, and extracting 25-70ml in 25-30 seconds using an espresso machine.\n
+            2. Steam Milk: While the espresso is brewing or immediately after, steam cold milk (about 120-150ml for a single cappuccino) using your espresso machine's steam wand.\n
+                - Frothing: Begin by incorporating air into the milk just below the surface to create foam (the \"stretching\" phase), aiming for a roughly 1cm increase in volume.\n
+                - Heating: Submerge the wand deeper and continue heating the milk until it reaches about 60-65°C (140-150°F), becoming velvety and smooth (the \"texturing\" phase). The foam should be fine and integrated, not large bubbles.\n
+            3. Pour Milk: Swirl the steamed milk in the pitcher to integrate the foam and liquid.\n
+            4. Combine: Pour the steamed milk directly over the espresso. Aim for a pour that combines the liquid milk and a generous amount of foam, creating distinct layers or a smooth integration depending on style.\n
+            5. Serve: A classic cappuccino has a dome of foam. It can be dusted with cocoa powder if desired. Serve immediately."
+    coffee_type_10:
+        name: Iced Cappuccino
+        info: A cappuccino with cold milk and a layer of cold frothed milk or foam, served over ice.
+        ingredients: ['@ingredient_1', '@ingredient_3', '@ingredient_10', '@ingredient_5']
+        preparation: "An Iced Cappuccino is a cold version of the classic, featuring espresso, cold milk, and a layer of cold frothed milk, served over ice.\n
+            \n
+            1. Brew Espresso: Prepare a single or double shot of espresso. This involves grinding beans finely, dosing 7-20g, tamping, and extracting 25-70ml in 25-30 seconds using an espresso machine.\n
+            2. Chill Espresso: Allow the hot espresso to cool slightly, or pour it directly over a few ice cubes in a separate glass to chill rapidly.\n
+            3. Froth Cold Milk: Pour cold milk (about 120-150ml) into a pitcher. Use a hand frother, a specific cold foam setting on some machines, or even vigorously shake the milk in a sealed container to create cold foam. The goal is to get a good volume of airy, cold foam.\n
+            4. Assemble: Fill your serving glass with ice cubes.\n
+            5. Combine: Pour the chilled espresso into the glass over the ice. Then, pour the cold milk over the espresso and ice.\n
+            6. Top with Foam: Spoon the cold frothed milk on top of the drink.\n
+            7. Serve: Serve immediately, often with a straw."
+    coffee_type_11:
+        name: Cafe Latte
+        info: Espresso with plenty of hot milk and a thin layer of foam.
+        ingredients: ['@ingredient_1', '@ingredient_3', '@ingredient_10']
+        preparation: "A Caffè Latte consists of espresso with a larger volume of hot steamed milk and a thin layer of microfoam, milder than a cappuccino.\n
+            \n
+            1. Brew Espresso: Prepare a single or double shot of espresso directly into your serving cup (a pre-heated 240-300ml or 8-10 oz cup is typical). This involves grinding beans finely, dosing 7-20g, tamping, and extracting 25-70ml in 25-30 seconds using an espresso machine.\n
+            2. Steam Milk: Immediately after brewing the espresso, steam cold milk (about 180-240ml for a standard latte) using your espresso machine's steam wand.\n
+                - Frothing: Briefly incorporate air into the milk just below the surface to create a small amount of fine foam (the \"stretching\" phase), aiming for only a slight increase in volume (e.g., 0.5cm).\n
+                - Heating: Submerge the wand deeper and continue heating the milk until it reaches about 60-65°C (140-150°F), becoming smooth and velvety (the \"texturing\" phase). The foam should be very fine and fully integrated with the liquid milk.\n
+            3. Pour Milk: Swirl the steamed milk in the pitcher to ensure the microfoam is fully incorporated.\n
+            4. Combine: Pour the steamed milk directly over the espresso. The goal is a continuous pour that results in a creamy texture with a very thin layer of integrated foam on top. This is where latte art is often created.\n
+            5. Serve: Serve immediately, often without additional toppings."
+    coffee_type_12:
+        name: Iced Latte
+        info: Espresso and cold milk, served over ice, often with a small layer of foam on top.
+        ingredients: ['@ingredient_1', '@ingredient_3', '@ingredient_10', '@ingredient_5']
+        preparation: "An Iced Latte is a refreshing cold drink made with espresso and cold milk served over ice, often with a thin layer of foam.\n
+            \n
+            1. Brew Espresso: Prepare a single or double shot of espresso. This involves grinding beans finely, dosing 7-20g, tamping, and extracting 25-70ml in 25-30 seconds using an espresso machine.\n
+            2. Chill Espresso: Allow the hot espresso to cool slightly, or pour it directly over a few ice cubes in a separate glass to chill rapidly.\n
+            3. Prepare Glass: Fill your serving glass (typically 300-400ml or 10-14 oz) completely with ice cubes.\n
+            4. Add Milk: Pour cold milk (about 240-300ml) into the glass over the ice.\n
+            5. Combine: Carefully pour the chilled espresso over the milk and ice. This often creates an appealing layered effect before mixing.\n
+            6. Serve: Stir gently if desired, and serve immediately, often with a straw."
+    coffee_type_13:
+        name: Latte Macciato
+        info: Steamed milk with an espresso carefully poured in, creating layers.
+        ingredients: ['@ingredient_1', '@ingredient_3', '@ingredient_10']
+        preparation: "A Latte Macchiato (\"stained milk\") is characterized by distinct layers of hot milk, espresso, and milk foam, with the espresso \"staining\" the milk.\n
+            \n
+            1. Steam Milk: Pour cold milk (about 250-350ml) into a steaming pitcher. Steam the milk using an espresso machine's steam wand until it's hot (around 60-65°C / 140-150°F) and produces a good volume of airy, yet stable foam. The goal is to separate the hot milk from the foam.\n
+            2. Pour Milk & Foam: Pour the steamed milk into a tall, clear glass, holding back the foam slightly with a spoon. Allow the milk to settle for a moment, letting the foam rise to the top and create a distinct layer.\n
+            3. Brew Espresso: Prepare a single or double shot of espresso (25-70ml) into a small, separate pitcher or cup. This involves grinding beans finely, dosing 7-20g, tamping, and extracting in 25-30 seconds.\n
+            4. Add Espresso: Carefully and slowly pour the freshly brewed espresso through the foam layer and into the hot milk. Pouring it gently into the center will create a visible dark \"stain\" or layer between the milk and the foam.\n
+            5. Serve: Serve immediately, showcasing the characteristic three layers: hot milk at the bottom, espresso in the middle, and a thick layer of foam on top."
+    coffee_type_14:
+        name: Cafe au Lait
+        info: Coffee mixed with an equal amount of hot, steamed milk, usually without foam.
+        ingredients: ['@ingredient_2', '@ingredient_3']
+    coffee_type_15:
+        name: Flat White
+        info: Espresso with finely textured, micro-foamed milk, less foamy than a latte.
+        ingredients: ['@ingredient_1', '@ingredient_3', '@ingredient_10']
+    coffee_type_16:
+        name: Cortado
+        info: Espresso cut with an equal or slightly greater amount of warm, unfoamed milk.
+        ingredients: ['@ingredient_1', '@ingredient_3']
+    coffee_type_17:
+        name: Espresso Frappé
+        info: Iced drink made by blending or shaking espresso with ice and often sugar, creating a foamy texture.
+        ingredients: ['@ingredient_1', '@ingredient_5', '@ingredient_11']
+    coffee_type_18:
+        name: Shakerato
+        info: Iced drink made by shaking hot espresso with ice cubes and a little syrup until well chilled.
+        ingredients: ['@ingredient_1', '@ingredient_5', '@ingredient_7']
+    coffee_type_19:
+        name: Affogato
+        info: A scoop of ice cream drowned in a shot of hot espresso.
+        ingredients: ['@ingredient_1', '@ingredient_6']
+    coffee_type_20:
+        name: Freddo Espresso
+        info: Iced drink made by blending or shaking an espresso with ice until very frothy, served over fresh ice.
+    coffee_type_21:
+        name: Freddo Cappoucino
+        info: Iced drink made with Freddo Espresso, topped with a thick, cold foam made from frothed milk.
+    coffee_type_22:
+        name: Bombón
+        info: A Spanish coffee drink made with equal parts espresso and sweetened condensed milk.
+    coffee_type_23:
+        name: Mocha
+        info: Espresso with steamed milk and chocolate (syrup or powder), often topped with whipped cream.
+    coffee_type_24:
+        name: Iced Mocha
+        info: Espresso with cold milk, chocolate syrup and served over ice, often topped with whipped cream.
+    coffee_type_25:
+        name: Breve
+        info: Espresso with steamed half-and-half milk and light cream, resulting in a rich, creamy texture.

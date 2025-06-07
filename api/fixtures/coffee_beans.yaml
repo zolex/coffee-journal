@@ -7,22 +7,10 @@ App\Entity\CoffeeBean:
     coffee_bean_2:
         coffee: '@coffee_2'
         type: '@bean_type_1'
-        percent: 80
+        percent: 50
     coffee_bean_3:
         coffee: '@coffee_2'
-        type: '@bean_type_3'
-        percent: 15
-    coffee_bean_4:
-        coffee: '@coffee_2'
-        type: '@bean_type_4'
-        percent: 5    
-        
-    coffee_bean_5:
-        coffee: '@coffee_3'
-        type: '@bean_type_1'
-        percent: 70
-    coffee_bean_6:
-        coffee: '@coffee_3'
         type: '@bean_type_2'
-        percent: 30
+        percent: 50
+
         

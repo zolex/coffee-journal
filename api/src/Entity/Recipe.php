@@ -4,17 +4,16 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\CoffeeTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CoffeeTypeRepository::class)]
+#[ORM\Entity]
 #[ApiResource(
     order: ['name' => 'ASC'],
 )]
-class CoffeeType
+class Recipe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,7 +28,7 @@ class CoffeeType
     private ?string $info = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    private ?string $preparation = null;
 
     /**
      * @var Collection<int, Journal>
@@ -37,9 +36,16 @@ class CoffeeType
     #[ORM\OneToMany(targetEntity: Journal::class, mappedBy: 'type', orphanRemoval: true)]
     private Collection $journals;
 
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
+    private Collection $ingredients;
+
     public function __construct()
     {
         $this->journals = new ArrayCollection();
+        $this->ingredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,14 +77,14 @@ class CoffeeType
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getPreparation(): ?string
     {
-        return $this->description;
+        return $this->preparation;
     }
 
-    public function setDescription(?string $description): static
+    public function setPreparation(?string $preparation): static
     {
-        $this->description = $description;
+        $this->preparation = $preparation;
 
         return $this;
     }
@@ -109,6 +115,30 @@ class CoffeeType
                 $journal->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(Ingredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        $this->ingredients->removeElement($ingredient);
 
         return $this;
     }
